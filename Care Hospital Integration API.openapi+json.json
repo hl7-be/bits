@@ -1,0 +1,852 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Care Hospital Integration API",
+        "description": "The API can be used to integrate the hospital's patient registration system with the care system.",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "https://bp-apim-we-main-apim.azure-api.net/api"
+        }
+    ],
+    "paths": {
+        "/victims/{uniqueNumber}/person-details": {
+            "get": {
+                "tags": [
+                    "person-details-controller"
+                ],
+                "summary": "getPersonDetail",
+                "description": "getPersonDetail",
+                "operationId": "getPersonDetail",
+                "parameters": [
+                    {
+                        "name": "uniqueNumber",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PersonDetails"
+                                },
+                                "example": {
+                                    "name": "string",
+                                    "firstName": "string",
+                                    "dateOfBirth": "string",
+                                    "nationalities": [
+                                        "string"
+                                    ],
+                                    "gender": "string",
+                                    "phoneNumbers": [
+                                        "string"
+                                    ],
+                                    "email": "string",
+                                    "address": {
+                                        "street": "string",
+                                        "number": "string",
+                                        "poBox": "string",
+                                        "postalCode": "string",
+                                        "city": "string",
+                                        "country": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorException"
+                                },
+                                "example": {
+                                    "timestamp": "string",
+                                    "extra": {},
+                                    "id": "string",
+                                    "errorMessage": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal error",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorException"
+                                },
+                                "example": {
+                                    "timestamp": "string",
+                                    "extra": {},
+                                    "id": "string",
+                                    "errorMessage": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "person-details-controller"
+                ],
+                "summary": "updatePersonDetail",
+                "description": "updatePersonDetail",
+                "operationId": "updatePersonDetail",
+                "parameters": [
+                    {
+                        "name": "uniqueNumber",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PersonDetails"
+                            },
+                            "example": {
+                                "name": "string",
+                                "firstName": "string",
+                                "dateOfBirth": "string",
+                                "nationalities": [
+                                    "string"
+                                ],
+                                "gender": "FEMALE",
+                                "phoneNumbers": [
+                                    "string"
+                                ],
+                                "email": "string",
+                                "address": {
+                                    "street": "string",
+                                    "number": "string",
+                                    "poBox": "string",
+                                    "postalCode": "string",
+                                    "city": "string",
+                                    "country": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": null
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorException"
+                                },
+                                "example": {
+                                    "timestamp": "string",
+                                    "extra": {},
+                                    "id": "string",
+                                    "errorMessage": "string"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorException"
+                                },
+                                "example": {
+                                    "timestamp": "string",
+                                    "extra": {},
+                                    "id": "string",
+                                    "errorMessage": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal error",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorException"
+                                },
+                                "example": {
+                                    "timestamp": "string",
+                                    "extra": {},
+                                    "id": "string",
+                                    "errorMessage": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/victims/{uniqueNumber}/transfer": {
+            "post": {
+                "tags": [
+                    "victim-controller"
+                ],
+                "summary": "victimPatientTransfer",
+                "description": "victimPatientTransfer",
+                "operationId": "victimPatientTransfer",
+                "parameters": [
+                    {
+                        "name": "uniqueNumber",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatientTransfer"
+                            },
+                            "example": {
+                                "time": "string",
+                                "leftCareZone": true
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": null
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorException"
+                                },
+                                "example": {
+                                    "timestamp": "string",
+                                    "extra": {},
+                                    "id": "string",
+                                    "errorMessage": "string"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorException"
+                                },
+                                "example": {
+                                    "timestamp": "string",
+                                    "extra": {},
+                                    "id": "string",
+                                    "errorMessage": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal error",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorException"
+                                },
+                                "example": {
+                                    "timestamp": "string",
+                                    "extra": {},
+                                    "id": "string",
+                                    "errorMessage": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/victims/{uniqueNumber}/patient-encounter": {
+            "post": {
+                "tags": [
+                    "victim-controller"
+                ],
+                "summary": "victimPatientEncounter",
+                "description": "victimPatientEncounter",
+                "operationId": "victimPatientEncounter",
+                "parameters": [
+                    {
+                        "name": "uniqueNumber",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PatientEncounter"
+                            },
+                            "example": {
+                                "time": "string",
+                                "triageStatus": "NONE"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "examples": {
+                                    "default": {
+                                        "value": null
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorException"
+                                },
+                                "example": {
+                                    "timestamp": "string",
+                                    "extra": {},
+                                    "id": "string",
+                                    "errorMessage": "string"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorException"
+                                },
+                                "example": {
+                                    "timestamp": "string",
+                                    "extra": {},
+                                    "id": "string",
+                                    "errorMessage": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal error",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorException"
+                                },
+                                "example": {
+                                    "timestamp": "string",
+                                    "extra": {},
+                                    "id": "string",
+                                    "errorMessage": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/victims/{uniqueNumber}": {
+            "get": {
+                "tags": [
+                    "victim-controller"
+                ],
+                "summary": "getVictim",
+                "description": "getVictim",
+                "operationId": "getVictim",
+                "parameters": [
+                    {
+                        "name": "uniqueNumber",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Victim"
+                                },
+                                "example": {
+                                    "uniqueNumber": "string",
+                                    "groupCode": "string",
+                                    "ageRange": "string",
+                                    "gender": "string",
+                                    "triage": "string",
+                                    "triageT1DetailStatus": "string",
+                                    "spokenLanguages": [
+                                        "string"
+                                    ],
+                                    "location": "string",
+                                    "locationLabel": "string",
+                                    "destinationRegulation": "string",
+                                    "triageHistory": [
+                                        {
+                                            "time": "string",
+                                            "location": "string",
+                                            "triageStatus": "string",
+                                            "triageT1DetailStatus": "string"
+                                        }
+                                    ],
+                                    "locationHistory": [
+                                        {
+                                            "timeOut": "string",
+                                            "timeIn": "string",
+                                            "location": "string"
+                                        }
+                                    ],
+                                    "additionalComments": "string"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorException"
+                                },
+                                "example": {
+                                    "timestamp": "string",
+                                    "extra": {},
+                                    "id": "string",
+                                    "errorMessage": "string"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal error",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorException"
+                                },
+                                "example": {
+                                    "timestamp": "string",
+                                    "extra": {},
+                                    "id": "string",
+                                    "errorMessage": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PatientTransfer": {
+                "required": [
+                    "leftCareZone",
+                    "time"
+                ],
+                "type": "object",
+                "properties": {
+                    "time": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "leftCareZone": {
+                        "type": "boolean"
+                    },
+                    "locationReference": {
+                        "type": "string"
+                    },
+                    "departmentReference": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ErrorException": {
+                "type": "object",
+                "properties": {
+                    "timestamp": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "extra": {
+                        "type": "object"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "errorMessage": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PatientEncounter": {
+                "required": [
+                    "time",
+                    "triageStatus"
+                ],
+                "type": "object",
+                "properties": {
+                    "time": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "triageStatus": {
+                        "enum": [
+                            "NONE",
+                            "RED",
+                            "YELLOW",
+                            "GREEN",
+                            "BLUE",
+                            "BLACK"
+                        ],
+                        "type": "string"
+                    }
+                }
+            },
+            "Address": {
+                "type": "object",
+                "properties": {
+                    "street": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "number": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "poBox": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "postalCode": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "city": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "country": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "nullable": true
+            },
+            "PersonDetails": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "dateOfBirth": {
+                        "type": "string",
+                        "format": "date",
+                        "nullable": true
+                    },
+                    "nationalities": {
+                        "uniqueItems": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "nullable": true
+                    },
+                    "gender": {
+                        "enum": [
+                            "FEMALE",
+                            "MALE",
+                            "OTHER",
+                            "UNDEFINED"
+                        ],
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "phoneNumbers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "nullable": true
+                        },
+                        "nullable": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "address": {
+                        "$ref": "#/components/schemas/Address"
+                    }
+                }
+            },
+            "LocationHistory": {
+                "type": "object",
+                "properties": {
+                    "timeOut": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "timeIn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "nullable": true
+                    },
+                    "location": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                }
+            },
+            "TriageHistory": {
+                "type": "object",
+                "properties": {
+                    "time": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "location": {
+                        "type": "string"
+                    },
+                    "triageStatus": {
+                        "enum": [
+                            "NONE",
+                            "RED",
+                            "YELLOW",
+                            "GREEN",
+                            "BLUE",
+                            "BLACK"
+                        ],
+                        "type": "string"
+                    },
+                    "triageT1DetailStatus": {
+                        "enum": [
+                            "NONE",
+                            "A",
+                            "B",
+                            "C"
+                        ],
+                        "type": "string",
+                        "nullable": true
+                    }
+                }
+            },
+            "Victim": {
+                "type": "object",
+                "properties": {
+                    "uniqueNumber": {
+                        "type": "string"
+                    },
+                    "groupCode": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "ageRange": {
+                        "enum": [
+                            "NONE",
+                            "BABY",
+                            "KID",
+                            "ADULT"
+                        ],
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "gender": {
+                        "enum": [
+                            "FEMALE",
+                            "MALE",
+                            "OTHER",
+                            "UNDEFINED"
+                        ],
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "triage": {
+                        "enum": [
+                            "NONE",
+                            "RED",
+                            "YELLOW",
+                            "GREEN",
+                            "BLUE",
+                            "BLACK"
+                        ],
+                        "type": "string"
+                    },
+                    "triageT1DetailStatus": {
+                        "enum": [
+                            "NONE",
+                            "A",
+                            "B",
+                            "C"
+                        ],
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "spokenLanguages": {
+                        "uniqueItems": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "location": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "locationLabel": {
+                        "type": "string"
+                    },
+                    "destinationRegulation": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "triageHistory": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TriageHistory"
+                        }
+                    },
+                    "locationHistory": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/LocationHistory"
+                        }
+                    },
+                    "additionalComments": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "apiKeyHeader": {
+                "type": "apiKey",
+                "name": "Ocp-Apim-Subscription-Key",
+                "in": "header"
+            },
+            "apiKeyQuery": {
+                "type": "apiKey",
+                "name": "subscription-key",
+                "in": "query"
+            }
+        }
+    },
+    "security": [
+        {
+            "apiKeyHeader": []
+        },
+        {
+            "apiKeyQuery": []
+        }
+    ]
+}
