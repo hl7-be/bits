@@ -1,7 +1,7 @@
 Profile: BePatientTransfer
-Parent: Procedure
+Parent: Encounter
 Id: be-patient-transfer 
 * status MS
-* code MS
-* performedDateTime MS
-* location MS
+* class MS
+* period MS
+* location 2..2 MS

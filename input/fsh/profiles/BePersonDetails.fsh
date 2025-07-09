@@ -9,5 +9,6 @@ Id: be-person-details
 * telecom MS
 * address MS
 * extension contains  BeExtAge named ageRange 0..1 MS  and
-                      BeExtSimpleNote named note 0..1 MS  
+                      BeExtSimpleNote named note 0..1 MS and
+                      BeExtLocationLabel named locationLabel  1..1 MS
 * communication MS                      
